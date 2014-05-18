@@ -16,7 +16,6 @@ app.use(bodyParser())
 // /upload - POST
 // Uploads a packet into the database. NOTE: Does not parse it
 app.post('/upload', function(req, res) {
-    var startTime = new Date();
     var since_time;
     if(!req.body.origin) {
         res.send(400,'No Origin Callsign (gateway) specified.')
@@ -51,16 +50,16 @@ app.post('/upload', function(req, res) {
                         console.log('DB Query Error: ', err)
                         return
                     }
-                    upload_packet(res,client,done,req.body.origin,req.body.data,rssi,result.rows[0].id,startTime)
+                    upload_packet(res,client,done,req.body.origin,req.body.data,rssi,result.rows[0].id)
                 })
             } else {
-                upload_packet(res,client,done,req.body.origin,req.body.data,rssi,result.rows[0].id,startTime)
+                upload_packet(res,client,done,req.body.origin,req.body.data,rssi,result.rows[0].id)
             }
         })
     })
 })
 
-function upload_packet(res,client,done,upload_origin,upload_data,upload_rssi,origin_id,startTime) {
+function upload_packet(res,client,done,upload_origin,upload_data,upload_rssi,origin_id) {
     client.query('INSERT INTO ukhasnet.upload(nodeid,packet,rssi) VALUES($1,$2,$3) RETURNING id;', [origin_id,upload_data,upload_rssi], function(err, result) {
         if(err) {
             done()
@@ -95,8 +94,6 @@ function upload_packet(res,client,done,upload_origin,upload_data,upload_rssi,ori
                 done()
             })
             res.type('application/json');
-            res.set('X-Response-Time', (new Date() - startTime)+'ms');
-            console.log('Upload served in: '+(new Date() - startTime)+'ms')
             res.send({'error':0})
         })
     })
