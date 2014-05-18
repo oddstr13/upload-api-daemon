@@ -1,7 +1,7 @@
 {
-  "name": "UKHASnet-upload-api-daemon",
+  "name": "upload-api-daemon",
   "version": "0.3.0",
-  "description": "Upload API Daemon for ukhas.net",
+  "description": "Upload HTTP API Daemon for ukhas.net",
   "contributors": [ 
     {
       "name": "Phil Crump",
@@ -9,18 +9,18 @@
     } 
   ],
   "scripts": {
-    "start": "node ./upload.js"
+    "start": "node ./upload-api-daemon.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/UKHASnet/UKHASnet-upload-api-daemon.git"
+    "url": "git@github.com:UKHASnet-hub/upload-api-daemon.git"
   },
   "author": "UKHASnet",
   "license": "GPLv3",
   "bugs": {
-    "url": "https://github.com/UKHASnet/UKHASnet-upload-api-daemon/issues"
+    "url": "https://github.com/UKHASnet-hub/upload-api-daemon/issues"
   },
-  "homepage": "https://github.com/UKHASnet/UKHASnet-upload-api-daemon",
+  "homepage": "https://github.com/UKHASnet-hub/upload-api-daemon",
   "dependencies": {
     "body-parser": "^1.2.0",
     "express": "^4.2.0",
